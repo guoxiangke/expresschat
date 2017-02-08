@@ -7,12 +7,12 @@ router.get('/test', function(req, res, next) {
   // res.send('respond with a rooms');
   //http://stackoverflow.com/questions/25463423/res-sendfile-absolute-path
   res.sendFile('chatroom.html', { root: path.join(__dirname, '../public') });
-
+  //https://github.com/onedesign/express-socketio-tutorial
   var io = res.io;
- // Chatroom
+  // Chatroom
   users = [];
   connections = [];
-  io.on('connection', function(socket){
+  io.once('connection', function(socket){
     connections.push(socket);
     console.log('Connected: %s sockets connected',connections.length);
 
@@ -36,10 +36,10 @@ router.get('/test', function(req, res, next) {
     });
 
     socket.on('user join', function (data,callback) {
-      console.log('new user join');
       callback(true);
       socket.username = data;
       users.push(socket.username);
+      console.log('new user join',users);
       updateUsernames();
     });
 
