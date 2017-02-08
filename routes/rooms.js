@@ -3,7 +3,23 @@ var router = express.Router();
 var path = require('path');
 
 /* GET users listing. */
-router.get('/test', function(req, res, next) {
+// https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4
+// route middleware to validate :name
+router.param('id', function(req, res, next, id) {
+    // TOdo validation on name here
+    // blah blah validation
+    // log something so we know its working
+    console.log('TODO: RoomID validations of ' + id);
+
+    // once validation is done save the new item in the req
+    req.id = id;
+    // go to the next thing
+    next();
+});
+
+router.get('/:id', function(req, res, next) {
+  var roomID = req.params.id;
+  console.log('Request RoomID:'+roomID);
   // res.send('respond with a rooms');
   //http://stackoverflow.com/questions/25463423/res-sendfile-absolute-path
   res.sendFile('chatroom.html', { root: path.join(__dirname, '../public') });
