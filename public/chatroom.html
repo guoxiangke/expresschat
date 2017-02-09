@@ -9,7 +9,7 @@
     <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -63,14 +63,23 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/javascripts/socket.io-1.2.0.js"></script>
+    <script src="/javascripts/jquery-1.11.1.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
 
     <script>
-    $(function(){
-      var socket = io();
+    $( document ).ready(function() {
+      var pathArray = window.location.pathname.split( '/' );
+      var socket = io('/livechat');//tell Socket.IO client to connect to that namespace:
+      // socket.emit(pathArray[2]);//socket.emit('firefox')，就可以加入firefox聊天室；
+      var roomID = pathArray[2];
+      socket.emit('subscribe',{"room" : roomID});
+      $(window).on('beforeunload', function(){
+        socket.emit('unsubscribe',{"room" : roomID});
+        return '确定离开吗？';
+      });
+
       var $messageForm  = $('#messageForm');
       var $message  = $('#message');
       var $chat  = $('#chat');
@@ -99,7 +108,7 @@
       function setUsername (name=false) {
         username = name?name:cleanInput($inputUsername.val().trim());
         // Tell the server your username
-        socket.emit('user join', username, function(data){
+        socket.emit('user join', {"username" : username, "room" : roomID} , function(data){
           if(data){
             $loginPage.hide();
             $chatPage.show();
@@ -160,6 +169,7 @@
 
       //get all users
       socket.on('users update', function(data){
+        console.log('users update');
         var html = '';
         for (var i = data.length - 1; i >= 0; i--) {
           html += '<li class="list-group-item">'+ data[i] +'</li>';
