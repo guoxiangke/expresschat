@@ -94,7 +94,7 @@ router.get('/:id', function(req, res, next) {
         }
       }
       socket.roomuser = roomuser;
-      console.log('new user join',roomuser);
+      console.log('new user join room:'+socket.room,roomuser);
       updateUsernames(roomuser);
     });
 
