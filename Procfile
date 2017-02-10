@@ -1,1 +1,1 @@
-web: DEBUG=expresschat:* npm start
+web: npm start
