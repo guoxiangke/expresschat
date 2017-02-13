@@ -27,11 +27,11 @@
               <div class="intercom-conversation-backgrounds">
                 <div class="intercom-conversation-background intercom-conversation-background-1"></div>
               </div>
-              <div class="intercom-conversation-body intercom-conversation-body-snapped" style="transform: translateY(-173px); bottom: -173px;">
+              <div class="intercom-conversation-body intercom-conversation-body-snapped" style="transform: translateY(0px); bottom: -173px;">
                 <div class="intercom-conversation-body-profile">
-                  <div class="intercom-conversation-profile">
-                    <div class="intercom-team-profile intercom-team-profile-collapsed">
-                      <div class="intercom-team-profile-full" style="opacity: 0;">
+                  <div class="intercom-conversation-profile intercom-conversation-profile-expanded">
+                    <div class="intercom-team-profile">
+                      <div class="intercom-team-profile-full" style="opacity: 1;">
                         <div class="intercom-team-profile-full-team-name">Intercom</div>
                         <div class="intercom-team-profile-full-response-delay">Typically replies in under 20m</div>
                         <div class="intercom-team-profile-full-avatar-container">
@@ -50,29 +50,10 @@
                         </div>
                         <div class="intercom-team-profile-full-intro"><span>We make it simple and seamless for businesses and people to talk to each other. Ask us anything <span title="grinning">😀</span></span></div>
                       </div>
-                      <div class="intercom-team-profile-compact" style="opacity: 1;">
-                        <div class="intercom-team-profile-compact-contents">
-                          <div class="intercom-team-profile-compact-avatar-container">
-                            <div class="intercom-team-profile-compact-avatar" style="z-index: 3; opacity: 1; margin-left: 0px;">
-                              <div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/383251/square_128/Photo_on_4-12-16_at_16.11-1460537250-1462491715.jpg?1462491715"></div>
-                            </div>
-                            <div class="intercom-team-profile-compact-avatar" style="z-index: 2; opacity: 0.7; margin-left: -18px;">
-                              <div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/547835/square_128/FullSizeRender-1472098840.jpg?1472098840"></div>
-                            </div>
-                            <div class="intercom-team-profile-compact-avatar" style="z-index: 1; opacity: 0.4; margin-left: -18px;">
-                              <div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/656461/square_128/IMG_1744-1472721461.jpg?1472721461"></div>
-                            </div>
-                          </div>
-                          <div class="intercom-team-profile-compact-body">
-                            <div class="intercom-team-profile-compact-team-name">Intercom</div>
-                            <div class="intercom-team-profile-compact-response-delay">Typically replies in under 20m</div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="intercom-conversation-body-parts" style="top: 248px; bottom: 55px;">
+                <div class="intercom-conversation-body-parts" style="top: 248px; bottom: 228px;">
                   <div class="intercom-conversation-body-parts-wrapper">
                     <div class="intercom-conversation-parts" style="transform: translateY(0px);">
                       <span>
@@ -87,7 +68,7 @@
                             </div>
                           </div>
                           <span>
-                            <div class="intercom-conversation-part-metadata">Just now. Not seen yet</div>
+                            <div class="intercom-conversation-part-metadata">13m ago. Not seen yet</div>
                           </span>
                         </div>
                         <div class="intercom-conversation-part intercom-conversation-part-admin intercom-conversation-part-grouped">
@@ -154,5 +135,9 @@
         <!-- react-empty: 48 -->
       </div>
     </div>
+
+    <script src="/javascripts/socket.io-1.2.0.js"></script>
+    <script src="/javascripts/jquery-1.11.1.js"></script>
+    <script src="/javascripts/client-intercom.js"></script>
   </body>
 </html>
