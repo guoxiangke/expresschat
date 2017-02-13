@@ -1,7 +1,6 @@
 $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
   var socket = io('/livechat');//tell Socket.IO client to connect to that namespace:
-  // socket.emit(pathArray[2]);//socket.emit('firefox')，就可以加入firefox聊天室；
   var roomID = pathArray[2];
   socket.emit('subscribe',{"room" : roomID});
   $(window).on('beforeunload', function(){
@@ -11,12 +10,12 @@ $( document ).ready(function() {
 
   var $messageForm  = $('#messageForm');
   var $message  = $('#message');
-  var $chat  = $('#chat');
+  var $chat  = $('#intercom-conversation-parts');
 
-  var $userForm = $('#userForm');
-  var $chatPage = $('#chatPage');
-  var $loginPage = $('#loginPage');
-  var $username = $('#username');
+  // var $userForm = $('#userForm');
+  // var $chatPage = $('#chatPage');
+  // var $loginPage = $('#loginPage');
+  // var $username = $('#username');
   var $users = $('#users');
 
   var username;

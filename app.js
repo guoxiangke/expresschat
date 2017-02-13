@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/room', rooms);
+app.use('/rooms', chatrooms);//某公司的livechat.com/room/companyId/roomId
 
 app.use(express.static('public'))
 

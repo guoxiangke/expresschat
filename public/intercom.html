@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>LiveChat</title>
-    <link rel="stylesheet" href="stylesheets/intercom.css">
+    <link rel="stylesheet" href="/stylesheets/intercom.css">
 
   </head>
   <body id="intercom-container-body">
@@ -123,12 +123,15 @@
               <span></span>
             </div>
             <div class="intercom-conversation-footer">
+              <form action="" id="messageForm">
               <div class="intercom-composer">
                 <pre><!-- react-text: 41 --><!-- /react-text --><br></pre>
-                <textarea placeholder="Write a reply..."></textarea>
+                <textarea  id="message" placeholder="Write a reply..."></textarea>
                 <span></span><span></span>
-                <div class="intercom-composer-upload-button"><input type="file" style="display: none;"></div>
+                <div class="intercom-composer-upload-button"><input type="file" style="display: none;">
+                <input type="submit" value="Send Message" class="btn btn-primary"></div>
               </div>
+              </form>
             </div>
           </div>
         </span>
