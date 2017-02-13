@@ -57,7 +57,7 @@
                   <div class="intercom-conversation-body-parts-wrapper">
                     <div class="intercom-conversation-parts" style="transform: translateY(0px);">
 
- <div class="intercom-conversation-part intercom-conversation-part-admin intercom-conversation-part-last">
+<div class="intercom-conversation-part intercom-conversation-part-admin intercom-conversation-part-last">
   <div class="intercom-notification-channels-card">
     <div class="intercom-notification-channels-card-admin-avatar">
       <div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/746691/square_128/data-1475052642?1475052642"></div>
@@ -70,29 +70,31 @@
         </div>
         <div class="intercom-notification-channels-option-container"><a class="intercom-notification-channels-option">Email</a><a class="intercom-notification-channels-option intercom-notification-channels-option-selected">SMS</a></div>
         <div class="intercom-notification-channels-input-collector">
-          <div class="intercom-notification-channels-input-container">
-            <div class="intercom-notification-channels-input intercom-notification-channels-phone-input">
-              <div class="intercom-flag cn"></div>
-              <label class="intercom-notification-channels-placeholder">
-                <span style="visibility: hidden;">+86</span><!-- react-text: 119 --> 123 456 7890<!-- /react-text -->
-              </label>
-              <input type="text" name="intercom-channel-collector" value="+86" autocomplete="off">
-            </div>
-            <div class="intercom-notification-channels-input-submit-container">
-              <div class="intercom-notification-channels-input-submit-button">
-                <div class="intercom-notification-channels-input-submit-icon"></div>
-                <div class="intercom-notification-channels-input-valid-icon"></div>
+          <form action="" id="userForm">
+            <div class="intercom-notification-channels-input-container">
+              <div class="intercom-notification-channels-input intercom-notification-channels-phone-input">
+                <div class="intercom-flag cn"></div>
+                <label class="intercom-notification-channels-placeholder">
+                  <span style="visibility: hidden;">+86</span><!-- react-text: 119 --> 123 456 7890<!-- /react-text -->
+                </label>
+                <input type="text" id="username" name="intercom-channel-collector" value="+86 " autocomplete="off">
+              </div>
+              <div class="intercom-notification-channels-input-submit-container">
+                <div class="intercom-notification-channels-input-submit-button">
+                  <div class="intercom-notification-channels-input-submit-icon"></div>
+                  <div class="intercom-notification-channels-input-valid-icon"></div>
+                </div>
               </div>
             </div>
-          </div>
-          <span></span>
+            <span></span>
+          </form>
         </div>
       </div>
     </div>
   </div>
   <span></span>
 </div>
-                      <span>
+
                         <div class="intercom-conversation-part intercom-conversation-part-user">
                           <div class="intercom-comment-container intercom-comment-container-user">
                             <div class="intercom-comment">
@@ -117,41 +119,25 @@
                           </div>
                           <span></span>
                         </div>
-                        <div class="intercom-conversation-part intercom-conversation-part-admin intercom-conversation-part-last">
-                          <div class="intercom-notification-channels-card">
-                            <div class="intercom-notification-channels-card-admin-avatar">
-                              <div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/746691/square_128/data-1475052642?1475052642"></div>
-                            </div>
-                            <div class="intercom-notification-channels intercom-notification-channels-last-part">
-                              <div class="intercom-notification-channels-options">
-                                <div class="intercom-notification-channels-title-container">
-                                  <div class="intercom-notification-channels-title">Get notified</div>
-                                  <div class="intercom-notification-channels-title-success"></div>
-                                </div>
-                                <div class="intercom-notification-channels-option-container"><a class="intercom-notification-channels-option intercom-notification-channels-option-selected">Email</a><a class="intercom-notification-channels-option">SMS</a></div>
-                                <div class="intercom-notification-channels-input-collector">
-                                  <div class="intercom-notification-channels-input-container">
-                                    <div class="intercom-notification-channels-input">
-                                      <label class="intercom-notification-channels-placeholder">
-                                        <span></span><!-- react-text: 119 -->email@domain.com<!-- /react-text -->
-                                      </label>
-                                      <input type="email" name="intercom-channel-collector" value="" autocomplete="off">
-                                    </div>
-                                    <div class="intercom-notification-channels-input-submit-container">
-                                      <div class="intercom-notification-channels-input-submit-button">
-                                        <div class="intercom-notification-channels-input-submit-icon"></div>
-                                        <div class="intercom-notification-channels-input-valid-icon"></div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <span></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <span></span>
-                        </div>
-                      </span>
+
+
+<div class="intercom-conversation-part intercom-conversation-part-admin intercom-conversation-part-last">
+  <div class="intercom-comment-container intercom-comment-container-admin">
+    <div class="intercom-comment-container-admin-avatar">
+      <div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/831182/square_128/Kate_Pic-1479735964.jpg?1479735964"></div>
+    </div>
+    <div class="intercom-comment">
+      <div class="intercom-blocks">
+        <div class="intercom-block intercom-block-paragraph">Hello <span title="wave">👋</span>&nbsp;</div>
+        <div class="intercom-block intercom-block-paragraph">How can I help? <span title="smiley">😃</span>&nbsp;</div>
+      </div>
+    </div>
+  </div>
+  <span>
+    <div class="intercom-conversation-part-metadata">31m ago</div>
+  </span>
+</div>
+
                     </div>
                   </div>
                 </div>
@@ -174,9 +160,55 @@
         <!-- react-empty: 48 -->
       </div>
     </div>
-
+<style>
+  .success_username{
+    border: 1px solid #fff;
+    border-right: 0;
+    padding: 0;
+    height: 20px;
+    font-weight: 400;
+    color: #a8b6c2;
+    -webkit-text-fill-color: #a8b6c2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
     <script src="/javascripts/socket.io-1.2.0.js"></script>
     <script src="/javascripts/jquery-1.11.1.js"></script>
+    <script>
+    $( document ).ready(function() {
+      $('.intercom-notification-channels-placeholder').on('click',function(){
+        $(this).hide();
+        $('#username').focus();
+      });
+      $ori_username = $('#username').val();
+      $('#username').blur(function(){
+        if($('#username').val()==$ori_username)
+          $(this).prev('.intercom-notification-channels-placeholder').show();
+      });
+      //valid email or phonenumer!
+      $('.intercom-notification-channels-input-submit-container').click(function(){
+          if(1){
+            $tmp_username = $('#username').val();
+            $('#userForm').submit();
+            $html = 'You\'ll be notified here and by email<p class="success_username">'+$tmp_username+'</p>';
+            $('.intercom-notification-channels-title-success').html($html);
+
+            $('.intercom-notification-channels-input-container').next('span').html('');
+            $('.intercom-notification-channels').addClass('intercom-notification-channels-success');
+
+            $('.intercom-notification-channels-input').addClass('intercom-notification-channels-input-success').html($('#username').val());
+
+            $('.intercom-notification-channels-input-submit-container').slideUp();
+            $('.intercom-notification-channels-placeholder').slideUp().html('');
+            $('.intercom-notification-channels-option-container').slideUp();
+          }else{
+              $('.intercom-notification-channels-input').addClass('intercom-notification-channels-input-error');
+              $('.intercom-notification-channels-input-container').next('span').html('<div class="intercom-notification-channels-error"><p class="intercom-notification-channels-error-text">That country code doesn\'t look quite right</p></div>');
+          }
+        });
+      });
+    </script>
     <script src="/javascripts/client-intercom.js"></script>
   </body>
 </html>

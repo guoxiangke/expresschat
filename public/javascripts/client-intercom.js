@@ -12,9 +12,9 @@ $( document ).ready(function() {
   var $message  = $('#message');
   var $chat  = $('#intercom-conversation-parts');
 
-  // var $userForm = $('#userForm');
+  var $userForm = $('#userForm');
   // var $chatPage = $('#chatPage');
-  // var $loginPage = $('#loginPage');
+  var $loginPage = $('#loginPage');
   var $username = $('#username');
   var $users = $('#users');
 
@@ -24,7 +24,6 @@ $( document ).ready(function() {
   var lastTypingTime;
   var TYPING_TIMER_LENGTH = 400; // ms
   var $window = $(window);
-  var $currentInput = $message.focus();
   var $inputMessage = $message;
   var $inputUsername = $username;
 
@@ -39,8 +38,8 @@ $( document ).ready(function() {
     socket.emit('user join', {"username" : username, "room" : roomID} , function(data){
       if(data){
         $loginPage.hide();
-        $chatPage.show();
-        $currentInput = $inputMessage.focus();
+        // $chatPage.show();//disabled input!!
+        $inputMessage.focus();
       }
     });
     $inputUsername.val('');
@@ -132,7 +131,8 @@ $( document ).ready(function() {
   }
 
   $inputMessage.on('input', function() {
-    updateTyping();
+    if(username)
+      updateTyping();
   });
 
   // Whenever the server emits 'typing', show the typing message
@@ -173,18 +173,16 @@ $( document ).ready(function() {
 
   // Initialize variables
   $window.keydown(function (event) {
-    // Auto-focus the current input when a key is typed
-    if (!(event.ctrlKey || event.metaKey || event.altKey)) {
-      $currentInput.focus();
-    }
-    // When the client hits ENTER on their keyboard
-    if (event.which === 13) {
-      if (username) {
-        sendMessage();
-        socket.emit('stop typing');
-        typing = false;
-      } else {
-        // setUsername();
+    if (username) {
+      // Auto-focus the current input when a key is typed
+      if (!(event.ctrlKey || event.metaKey || event.altKey)) {
+        $inputMessage.focus();
+      }
+      // When the client hits ENTER on their keyboard
+      if (event.which === 13) {
+          sendMessage();
+          socket.emit('stop typing');
+          typing = false;
       }
     }
   });
