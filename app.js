@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var rooms = require('./routes/rooms');
+var chatrooms = require('./routes/chatrooms');
 
 var app = express();
 var server = require('http').Server(app);
@@ -33,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/room', rooms);
-app.use('/rooms', chatrooms);//某公司的livechat.com/room/companyId/roomId
+app.use('/chatrooms', chatrooms);//某公司的livechat.com/room/companyId/roomId
 
 app.use(express.static('public'))
 

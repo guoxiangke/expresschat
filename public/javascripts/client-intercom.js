@@ -15,7 +15,7 @@ $( document ).ready(function() {
   // var $userForm = $('#userForm');
   // var $chatPage = $('#chatPage');
   // var $loginPage = $('#loginPage');
-  // var $username = $('#username');
+  var $username = $('#username');
   var $users = $('#users');
 
   var username;
