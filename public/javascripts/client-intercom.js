@@ -10,7 +10,7 @@ $( document ).ready(function() {
 
   var $messageForm  = $('#messageForm');
   var $message  = $('#message');
-  var $chat  = $('#intercom-conversation-parts');
+  var $chat  = $('#chat');
 
   var $userForm = $('#userForm');
   // var $chatPage = $('#chatPage');
@@ -62,36 +62,30 @@ $( document ).ready(function() {
     $inputMessage.val('');
   });
 
+  //changed depend on UI
+  $('.intercom-composer-send-button').click(function(){
+    var new_message = cleanInput($inputMessage.val().trim());
+    if(new_message){//todo check!
+      socket.emit('send message', new_message);
+      $inputMessage.val('');
+      addLocalMessage(new_message);
+    }
+  });
+
+  function addLocalMessage(new_message){
+    $chat.append('<div class="intercom-conversation-part intercom-conversation-part-user intercom-conversation-part-last"><div class="intercom-comment-container intercom-comment-container-user"><div class="intercom-comment"><div class="intercom-blocks"><div class="intercom-block intercom-block-paragraph"><p>'+new_message+'</p></div></div></div></div><span><div class="intercom-conversation-part-metadata">Just now. Not seen yet</div></span></div>');
+  }
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message',function(data){
-    addChatMessage(data);
+    console.log('new message',data);
+    addChatMessage(data);//add remote message!
   });
 
 
   // Adds the visual chat message to the message list
   function addChatMessage (data, options) {
-    $chat.append('<div class="well"><strong>'+data.username+':</strong>'+data.message+'</div>');
-    // // Don't fade the message in if there is an 'X was typing'
-    // var $typingMessages = getTypingMessages(data);
-    // options = options || {};
-    // if ($typingMessages.length !== 0) {
-    //   options.fade = false;
-    //   $typingMessages.remove();
-    // }
-
-    // var $usernameDiv = $('<span class="username"/>')
-    //   .text(data.username)
-    //   .css('color', getUsernameColor(data.username));
-    // var $messageBodyDiv = $('<span class="messageBody">')
-    //   .text(data.message);
-
-    // var typingClass = data.typing ? 'typing' : '';
-    // var $messageDiv = $('<li class="message"/>')
-    //   .data('username', data.username)
-    //   .addClass(typingClass)
-    //   .append($usernameDiv, $messageBodyDiv);
-
-    // addMessageElement($messageDiv, options);
+    // $chat.append('<div class="well"><strong>'+data.username+':</strong>'+data.message+'</div>');
+    $chat.append('<div class="intercom-conversation-part intercom-conversation-part-admin"><div class="intercom-comment-container intercom-comment-container-admin"><div class="intercom-comment-container-admin-avatar"><div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/831182/square_128/Kate_Pic-1479735964.jpg?1479735964"></div></div><div class="intercom-comment"><div class="intercom-blocks"><div class="intercom-block intercom-block-paragraph">'+data.message+'</div></div></div></div><span></span></div>');
   }
 
   //get all users
@@ -108,14 +102,12 @@ $( document ).ready(function() {
   // Keyboard events begin
   // Updates the typing event
   function updateTyping () {
-    console.log(username);
     if (username) {
       if (!typing) {
         typing = true;
         socket.emit('typing');
-        console.log('emit typing1');
       }else{
-        console.log('stoptyping1');
+        // console.log('stoptyping1');
       }
       lastTypingTime = (new Date()).getTime();
 
@@ -187,6 +179,9 @@ $( document ).ready(function() {
     }
   });
 
+  function sendMessage(){
+    console.log('TODO:submit form!');
+  }
   // Keyboard events end
   //TODO: reconnect with cookie name:
   //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens

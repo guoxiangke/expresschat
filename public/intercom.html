@@ -30,7 +30,7 @@
               <div class="intercom-conversation-body intercom-conversation-body-snapped" style="transform: translateY(0px); bottom: -173px;">
                 <div class="intercom-conversation-body-profile">
                   <div class="intercom-conversation-profile intercom-conversation-profile-expanded">
-                    <div class="intercom-team-profile">
+                    <div class="intercom-team-profile" style="display:none">
                       <div class="intercom-team-profile-full" style="opacity: 1;">
                         <div class="intercom-team-profile-full-team-name">Intercom</div>
                         <div class="intercom-team-profile-full-response-delay">Typically replies in under 20m</div>
@@ -51,11 +51,42 @@
                         <div class="intercom-team-profile-full-intro"><span>We make it simple and seamless for businesses and people to talk to each other. Ask us anything <span title="grinning">😀</span></span></div>
                       </div>
                     </div>
+  <div class="intercom-admin-profile">
+    <div class="intercom-admin-profile-full" style="opacity: 1;">
+      <div class="intercom-admin-profile-full-background" style="background-image: url(&quot;https://static.intercomassets.com/avatars/831182/square_128/Kate_Pic-1479735964.jpg?1479735964&quot;);"></div>
+      <div class="intercom-admin-profile-full-avatar">
+        <div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/831182/square_128/Kate_Pic-1479735964.jpg?1479735964"></div>
+      </div>
+      <div class="intercom-admin-profile-full-body">
+        <div class="intercom-admin-profile-full-admin-name">Kate</div>
+        <div class="intercom-admin-profile-full-last-active">Active 10h ago</div>
+      </div>
+      <div class="intercom-admin-profile-full-title-and-location">
+        <div class="intercom-admin-profile-full-title"><span>Account Development Representative</span></div>
+        <div class="intercom-admin-profile-full-local-time">8:11 am in Dublin, Ireland</div>
+      </div>
+    </div>
+
+    <div class="intercom-admin-profile-compact" style="opacity: 0;">
+      <div class="intercom-admin-profile-compact-contents">
+        <div class="intercom-admin-profile-compact-avatar">
+          <div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/831182/square_128/Kate_Pic-1479735964.jpg?1479735964"></div>
+        </div>
+        <div class="intercom-admin-profile-compact-body">
+          <div class="intercom-admin-profile-compact-admin-name">Kate</div>
+          <div class="intercom-admin-profile-compact-last-active">Active 10h ago</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
                   </div>
+
+
                 </div>
                 <div class="intercom-conversation-body-parts" style="top: 248px; bottom: 228px;">
                   <div class="intercom-conversation-body-parts-wrapper">
-                    <div class="intercom-conversation-parts" style="transform: translateY(0px);">
+                    <div class="intercom-conversation-parts" id="chat" style="transform: translateY(0px);">
 
 <div class="intercom-conversation-part intercom-conversation-part-admin intercom-conversation-part-last">
   <div class="intercom-notification-channels-card">
@@ -138,21 +169,29 @@
   </span>
 </div>
 
+
+<div class="intercom-conversation-parts-date-divider">February 14</div>
+
+<div class="intercom-conversation-part intercom-conversation-part-admin"><div class="intercom-comment-container intercom-comment-container-admin"><div class="intercom-comment-container-admin-avatar"><div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/831182/square_128/Kate_Pic-1479735964.jpg?1479735964"></div></div><div class="intercom-comment"><div class="intercom-blocks"><div class="intercom-block intercom-block-paragraph">Can I help?&nbsp;</div></div></div></div><span></span></div>
+
+<div class="intercom-conversation-part intercom-conversation-part-user intercom-conversation-part-grouped"><div class="intercom-comment-container intercom-comment-container-user"><div class="intercom-comment"><div class="intercom-blocks"><div class="intercom-block intercom-block-paragraph"><p>just test,. thanks</p></div></div></div></div><span></span></div>
+
+<div class="intercom-conversation-part intercom-conversation-part-user intercom-conversation-part-last"><div class="intercom-comment-container intercom-comment-container-user"><div class="intercom-comment"><div class="intercom-blocks"><div class="intercom-block intercom-block-paragraph"><p>test</p></div></div></div></div><span><div class="intercom-conversation-part-metadata">Just now. Not seen yet</div></span></div>
+
                     </div>
                   </div>
                 </div>
               </div>
               <span></span>
             </div>
+
             <div class="intercom-conversation-footer">
               <form action="" id="messageForm">
               <div class="intercom-composer">
                 <pre><!-- react-text: 41 --><!-- /react-text --><br></pre>
                 <textarea  id="message" placeholder="Write a reply..."></textarea>
                 <span></span><span></span>
-                <div class="intercom-composer-upload-button"><input type="file" style="display: none;">
-                <input type="submit" value="Send Message" class="btn btn-primary"></div>
-              </div>
+                <div class="intercom-composer-send-button"><input type="file" style="display: none;"></div>
               </form>
             </div>
           </div>
@@ -171,6 +210,10 @@
     -webkit-text-fill-color: #a8b6c2;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+#intercom-container .intercom-admin-profile-compact-contents {
+    background-color: rgba(0,0,0,.1);
 }
 </style>
     <script src="/javascripts/socket.io-1.2.0.js"></script>
@@ -207,6 +250,34 @@
               $('.intercom-notification-channels-input-container').next('span').html('<div class="intercom-notification-channels-error"><p class="intercom-notification-channels-error-text">That country code doesn\'t look quite right</p></div>');
           }
         });
+
+
+      $( '.intercom-conversation-body-parts').scroll(function() {
+        var pox = $('.intercom-conversation-body-parts').scrollTop();
+        if(pox <= 19){
+            $('.intercom-conversation-profile').addClass('intercom-conversation-profile-expanded');
+            $('.intercom-admin-profile').removeClass('intercom-team-profile-collapsed');
+            $('.intercom-team-profile-full').attr('style', 'opacity: 1;');
+            $('.intercom-admin-profile-compact').attr('style', 'opacity: 0;');
+
+
+            $('.intercom-conversation-body-snapped').attr('style', 'transform: translateY(0px); bottom: -99px;');
+            $('.intercom-conversation-body-parts').attr('style', 'top: 174px; bottom: 154px;');
+        }else{
+            $('.intercom-conversation-profile').removeClass('intercom-conversation-profile-expanded');
+            $('.intercom-admin-profile').addClass('intercom-team-profile-collapsed');
+            $('.intercom-team-profile-full').hide();
+            $('.intercom-admin-profile-compact').attr('style', 'opacity: 1;');
+
+
+            $('.intercom-conversation-body-snapped').attr('style', 'transform: translateY(-118px); bottom: -99px;');
+            $('.intercom-conversation-body-parts').attr('style', 'top: 174px; bottom: 55px;');
+
+        }
+      });
+
+
+
       });
     </script>
     <script src="/javascripts/client-intercom.js"></script>

@@ -76,7 +76,8 @@ router.get('/:id', function(req, res, next) {
     socket.on('send message', function (data) {
       // we tell the client to execute 'new message'
       // io.sockets.emit('new message', {//socket.broadcast.emit
-      io.of(namespace).in(roomID).emit('new message', {//socket.broadcast.emit
+      // io.of(namespace).in(roomID).emit('new message', {//socket.broadcast.emit
+      socket.broadcast.to(roomID).emit('new message', {
         username: socket.username,
         message: data
       });
