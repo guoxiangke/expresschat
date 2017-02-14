@@ -96,10 +96,14 @@
     <div class="intercom-notification-channels intercom-notification-channels-last-part">
       <div class="intercom-notification-channels-options">
         <div class="intercom-notification-channels-title-container">
-          <div class="intercom-notification-channels-title">Get notified</div>
+          <div class="intercom-notification-channels-title">获取回复方式</div>
           <div class="intercom-notification-channels-title-success"></div>
         </div>
-        <div class="intercom-notification-channels-option-container"><a class="intercom-notification-channels-option">Email</a><a class="intercom-notification-channels-option intercom-notification-channels-option-selected">SMS</a></div>
+        <div class="intercom-notification-channels-option-container">
+          <a class="intercom-notification-channels-option">邮箱</a>
+          <a class="intercom-notification-channels-option intercom-notification-channels-option-selected">短信</a>
+          <a class="intercom-notification-channels-option">微信</a>
+        </div>
         <div class="intercom-notification-channels-input-collector">
           <form action="" id="userForm">
             <div class="intercom-notification-channels-input-container">
@@ -282,6 +286,13 @@
         }
       });
 
+
+      $('.intercom-notification-channels-option ').click(function(){
+         $(this).addClass('intercom-notification-channels-option-selected');
+        $('.intercom-notification-channels-option').each(function(){
+          $(this).removeClass('intercom-notification-channels-option-selected');
+        });
+      });
 
 
       });

@@ -96,11 +96,11 @@ $( document ).ready(function() {
   //get all users
   socket.on('users update', function(data){
     console.log('users update');
-    var html = '';
-    for (var i = data.length - 1; i >= 0; i--) {
-      html += '<li class="list-group-item">'+ data[i] +'</li>';
-    }
-    $users.html(html);
+    // var html = '';
+    // for (var i = data.length - 1; i >= 0; i--) {
+    //   html += '<li class="list-group-item">'+ data[i] +'</li>';
+    // }
+    // $users.html(html);
   });
 
 
