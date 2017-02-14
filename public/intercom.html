@@ -178,6 +178,9 @@
 
 <div class="intercom-conversation-part intercom-conversation-part-user intercom-conversation-part-last"><div class="intercom-comment-container intercom-comment-container-user"><div class="intercom-comment"><div class="intercom-blocks"><div class="intercom-block intercom-block-paragraph"><p>test</p></div></div></div></div><span><div class="intercom-conversation-part-metadata">Just now. Not seen yet</div></span></div>
 
+
+<div class="intercom-conversation-part intercom-conversation-part-admin intercom-conversation-part-last"><div class="intercom-comment-container intercom-comment-container-admin"><div class="intercom-comment-container-admin-avatar"><div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/831182/square_128/Kate_Pic-1479735964.jpg?1479735964"></div></div><div class="intercom-comment"><div class="intercom-blocks"><div class="intercom-block intercom-block-paragraph">ohhhh, why is that?</div></div></div></div><span><div class="intercom-conversation-part-metadata">Just now</div></span></div>
+
                     </div>
                   </div>
                 </div>
@@ -229,6 +232,9 @@
         if($('#username').val()==$ori_username)
           $(this).prev('.intercom-notification-channels-placeholder').show();
       });
+
+      $('#message').prop('disabled', true).attr('placeholder','Choose A notified Way First!');
+
       //valid email or phonenumer!
       $('.intercom-notification-channels-input-submit-container').click(function(){
           if(1){

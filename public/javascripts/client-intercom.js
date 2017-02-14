@@ -34,6 +34,7 @@ $( document ).ready(function() {
   // Sets the client's username
   function setUsername (name=false) {
     username = name?name:cleanInput($inputUsername.val().trim());
+    $('#message').prop('disabled', false).attr('placeholder','Write a reply...');
     // Tell the server your username
     socket.emit('user join', {"username" : username, "room" : roomID} , function(data){
       if(data){
@@ -57,21 +58,25 @@ $( document ).ready(function() {
 
   $messageForm.submit(function(e){
     e.preventDefault();
-    var new_message = cleanInput($inputMessage.val().trim());
-    socket.emit('send message', new_message);
-    $inputMessage.val('');
+    sendMessage();
   });
 
   //changed depend on UI
   $('.intercom-composer-send-button').click(function(){
+    sendMessage();
+  });
+
+ function sendMessage(){
     var new_message = cleanInput($inputMessage.val().trim());
     if(new_message){//todo check!
       socket.emit('send message', new_message);
-      $inputMessage.val('');
+      $inputMessage.val('').focus();
       addLocalMessage(new_message);
+      $('.intercom-conversation-body-parts').animate({
+          scrollTop: $(".intercom-conversation-body-parts").offset().top
+      }, 2000);
     }
-  });
-
+ }
   function addLocalMessage(new_message){
     $chat.append('<div class="intercom-conversation-part intercom-conversation-part-user intercom-conversation-part-last"><div class="intercom-comment-container intercom-comment-container-user"><div class="intercom-comment"><div class="intercom-blocks"><div class="intercom-block intercom-block-paragraph"><p>'+new_message+'</p></div></div></div></div><span><div class="intercom-conversation-part-metadata">Just now. Not seen yet</div></span></div>');
   }
@@ -129,11 +134,13 @@ $( document ).ready(function() {
 
   // Whenever the server emits 'typing', show the typing message
   socket.on('typing', function (data) {
+    console.log('typing');
     addChatTyping(data);
   });
 
   // Whenever the server emits 'stop typing', kill the typing message
   socket.on('stop typing', function (data) {
+    console.log('stop typing');
     removeChatTyping(data);
   });
 
@@ -142,12 +149,14 @@ $( document ).ready(function() {
     data.typing = true;
     data.message = ' is typing';
 
-    var typingClass = data.typing ? 'typing' : '';
-    var $messageDiv = $('<li class="message"/>')
-    .data('username', data.username)
-    .addClass(typingClass).text(data.username+data.message);
+    // var typingClass = data.typing ? 'typing' : '';
+    // var $messageDiv = $('<li class="message"/>')
+    // .data('username', data.username)
+    // .addClass(typingClass).text(data.username+data.message);
 
-    $typingDiv.html($messageDiv);
+    // $typingDiv.html($messageDiv);
+
+    $chat.append('<div class="intercom-typing-admin typing" data-username="'+data.username+'"><div class="intercom-typing-admin-avatar"><div class="intercom-avatar"><img src="https://static.intercomassets.com/avatars/831182/square_128/Kate_Pic-1479735964.jpg?1479735964"></div></div><div class="intercom-typing-admin-bubble"><div class="intercom-typing-admin-dot-1"></div><div class="intercom-typing-admin-dot-2"></div><div class="intercom-typing-admin-dot-3"></div></div></div>');
   }
   // Removes the visual chat typing message
   function removeChatTyping (data) {
@@ -158,7 +167,7 @@ $( document ).ready(function() {
 
   // Gets the 'X is typing' messages of a user
   function getTypingMessages (data) {
-    return $('.typing.message').filter(function (i) {
+    return $('.typing').filter(function (i) {
       return $(this).data('username') === data.username;
     });
   }
@@ -179,9 +188,6 @@ $( document ).ready(function() {
     }
   });
 
-  function sendMessage(){
-    console.log('TODO:submit form!');
-  }
   // Keyboard events end
   //TODO: reconnect with cookie name:
   //http://stackoverflow.com/questions/4432271/node-js-and-socket-io-how-to-reconnect-as-soon-as-disconnect-happens
