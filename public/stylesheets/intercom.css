@@ -7969,6 +7969,11 @@ only screen and (max-device-width:667px) and (min-resolution:1.3dppx) {
         margin: 0 auto;
         width: calc(100% - 20px)
     }
+
+
+    #intercom-container .intercom-composer-emoji-button{
+        display: none;
+    }
 }
 
 @media only screen and (max-device-width:667px),
@@ -7999,4 +8004,5 @@ screen and (min-width:371px) {
     .intercom-header-buttons-close {
         display: block!important
     }
+
 }
