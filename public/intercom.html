@@ -13,7 +13,6 @@
     <div id="intercom-container">
       <div data-reactroot="" class="intercom-messenger">
         <div class="intercom-messenger-background"></div>
-        <span>
           <div class="intercom-conversation">
             <div class="intercom-header-buttons">
               <div class="intercom-header-buttons-back">
@@ -209,7 +208,6 @@
               </form>
             </div>
           </div>
-        </span>
         <!-- react-empty: 48 -->
       </div>
     </div>
@@ -289,8 +287,9 @@
         if(pox <= 19){
             $('.intercom-conversation-profile').addClass('intercom-conversation-profile-expanded');
             $('.intercom-admin-profile').removeClass('intercom-team-profile-collapsed');
-            $('.intercom-team-profile-full').attr('style', 'opacity: 1;');
             $('.intercom-admin-profile-compact').attr('style', 'opacity: 0;');
+
+            $('.intercom-admin-profile-full-title-and-location').attr('style', 'opacity: 1;');
 
 
             $('.intercom-conversation-body-snapped').attr('style', 'transform: translateY(0px); bottom: -99px;');
@@ -298,9 +297,9 @@
         }else{
             $('.intercom-conversation-profile').removeClass('intercom-conversation-profile-expanded');
             $('.intercom-admin-profile').addClass('intercom-team-profile-collapsed');
-            $('.intercom-team-profile-full').hide();
             $('.intercom-admin-profile-compact').attr('style', 'opacity: 1;');
 
+            $('.intercom-admin-profile-full-title-and-location').attr('style', 'opacity: 0;');
 
             $('.intercom-conversation-body-snapped').attr('style', 'transform: translateY(-100px); bottom: -99px;');
             $('.intercom-conversation-body-parts').attr('style', 'top: 174px; bottom: 55px;');
