@@ -1,8 +1,8 @@
 // getting-started.js
 var mongoose = require('mongoose');
-console.log(process.env);
-mongoose.connect('mongodb://'+process.env.MONGODB_USERNAME+':'+process.env.MONGODB_PASSWORD+'@'+process.env.MONGODB_PORT_27017_TCP_ADDR+':'+process.env.MONGODB_PORT_27017_TCP_PORT+'/'+process.env.MONGODB_INSTANCE_NAME);
-
+var connect_str = 'mongodb://'+process.env.MONGODB_USERNAME+':'+process.env.MONGODB_PASSWORD+'@'+process.env.MONGODB_PORT_27017_TCP_ADDR+':'+process.env.MONGODB_PORT_27017_TCP_PORT+'/'+process.env.MONGODB_INSTANCE_NAME;
+console.log(connect_str);
+mongoose.connect(connect_str);
 var db = mongoose.connection;
 
 module.exports = db;
