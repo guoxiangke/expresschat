@@ -2,12 +2,21 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var roomID = 'default';
+//Database begin
+var database = require('../databases/database');
+var db = database.db;
+var mongoose = database.mongoose;
 
-var db = require('../databases/database');
-db.on('error', console.error.bind(console, '1connection error:'));
+var Chatroom = database.Chatroom;
+var User = database.User;
+var Message = database.Message;
+var Log = database.Log;
+
+db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('we\'re connected!');
 });
+//Database end
 
 /* GET users listing. */
 // 1. https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4

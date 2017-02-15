@@ -1,40 +1,22 @@
 // getting-started.js
 var mongoose = require('mongoose');
-var connect_str = 'mongodb://'+process.env.MONGODB_USERNAME+':'+process.env.MONGODB_PASSWORD+'@'+process.env.MONGODB_PORT_27017_TCP_ADDR+':'+process.env.MONGODB_PORT_27017_TCP_PORT+'/'+process.env.MONGODB_INSTANCE_NAME;
-console.log(connect_str);
+var connect_str = 'mongodb://localhost:27017/db';
+if(process.env.MONGODB_USERNAME)
+  var connect_str = 'mongodb://'+process.env.MONGODB_USERNAME+':'+process.env.MONGODB_PASSWORD+'@'+process.env.MONGODB_PORT_27017_TCP_ADDR+':'+process.env.MONGODB_PORT_27017_TCP_PORT+'/'+process.env.MONGODB_INSTANCE_NAME;
+
 mongoose.connect(connect_str);
 var db = mongoose.connection;
 
-module.exports = db;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//   console.log('we\'re connected!');
+var Chatroom = require('./eloquents/models/chatrooms');
+var User = require('./eloquents/models/users');
+var Message = require('./eloquents/models/messages');
+var Log = require('./eloquents/models/logs');
 
-
-//   var kittySchema = mongoose.Schema({
-//     name: String
-//   });
-//   var Kitten = mongoose.model('Kitten', kittySchema);
-
-//   var silence = new Kitten({ name: 'Silence' });
-//   console.log(silence.name); // 'Silence'
-
-
-//   // NOTE: methods must be added to the schema before compiling it with mongoose.model()
-//   kittySchema.methods.speak = function () {
-//     var greeting = this.name
-//       ? "Meow name is " + this.name
-//       : "I don't have a name";
-//     console.log(greeting);
-//   }
-
-
-//   var fluffy = new Kitten({ name: 'fluffy' });
-//   fluffy.speak(); // "Meow name is fluffy"
-
-//   fluffy.save(function (err, fluffy) {
-//     if (err) return console.error(err);
-//     fluffy.speak();
-//   });
-
-// });
+module.exports = {
+  db: db,
+  mongoose: mongoose,
+  Chatroom:Chatroom,
+  User:User,
+  Message:Message,
+  Log:Log
+};
