@@ -3,6 +3,11 @@ var router = express.Router();
 var path = require('path');
 var roomID = 'default';
 
+var db = require('../databases/database');
+db.on('error', console.error.bind(console, '1connection error:'));
+db.once('open', function() {
+  console.log('we\'re connected!');
+});
 
 /* GET users listing. */
 // 1. https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4
