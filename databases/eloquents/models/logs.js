@@ -7,9 +7,9 @@ var Schema = mongoose.Schema;
 var logSchema = new Schema({
   // _id: Number, //logID
   type: String, //warning! error! notice!
-  user_id: String,
-  room_id: String,
-  message_id: String,
+  user_id: Schema.Types.ObjectId,
+  room_id: Schema.Types.ObjectId,
+  message_id: Schema.Types.ObjectId,
   content: String,
   created_at:  { type: Date, default: Date.now }
 });

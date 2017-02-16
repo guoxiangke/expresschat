@@ -1,10 +1,10 @@
 $( document ).ready(function() {
   var pathArray = window.location.pathname.split( '/' );
-  var socket = io('/livechat');//tell Socket.IO client to connect to that namespace:
-  var roomID = pathArray[2];
-  socket.emit('subscribe',{"room" : roomID});
+  var socket = io('/'+pathArray[2]);//tell Socket.IO client to connect to that namespace:
+  var roomID = pathArray[2]+'/'+pathArray[3];
+  socket.emit('subscribe');
   $(window).on('beforeunload', function(){
-    socket.emit('unsubscribe',{"room" : roomID});
+    socket.emit('unsubscribe');
     return '确定离开吗？';
   });
 
@@ -31,12 +31,28 @@ $( document ).ready(function() {
   if(username){
       setUsername (username);
   }
+  //use login page input username
+  $userForm.submit(function(e){
+    e.preventDefault();
+    setUsername ();
+  });
   // Sets the client's username
   function setUsername (name=false) {
     username = name?name:cleanInput($inputUsername.val().trim());
     $('#message').prop('disabled', false).attr('placeholder','Write a reply...');
     // Tell the server your username
-    socket.emit('user join', {"username" : username, "room" : roomID} , function(data){
+    var nav ={
+      'appCodeName':navigator.appCodeName,
+      'appName':navigator.appName,
+      'appVersion':navigator.appVersion,
+      'platform':navigator.platform,
+      'product':navigator.product,
+      'productSub':navigator.productSub,
+      'vendor':navigator.vendor,
+      'language':navigator.language,
+      'userAgent':navigator.userAgent
+    }
+    socket.emit('user join', {'username':username,'ip':ip,'navigator':nav}, function(data){
       if(data){
         $loginPage.hide();
         // $chatPage.show();//disabled input!!
@@ -50,11 +66,6 @@ $( document ).ready(function() {
   function cleanInput (input) {
     return $('<div/>').text(input).text();
   }
-  //use login page input username
-  $userForm.submit(function(e){
-    e.preventDefault();
-    setUsername ();
-  });
 
   $messageForm.submit(function(e){
     e.preventDefault();
