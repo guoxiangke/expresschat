@@ -5,7 +5,7 @@ web:
     volumes:
         - /usr/src/app/public/files
     links:
-        - "db"
+        - "dbhost"
     ports:
         - "3000:3000"
     environment:
@@ -15,15 +15,13 @@ web:
         - MONGO_PORT_27017_TCP_PORT=27017
         - MONGO_INSTANCE_NAME=chat
 #################
-db:
+dbhost:
     image: mongo:latest
     hostname: dbhost
     restart: always
     volumes_from:
         - storage-mongo
     environment:
-        - MONGO_USERNAME=chat
-        - MONGO_PASSWORD=chat
         - MONGO_PORT_27017_TCP_ADDR=dbhost
         - MONGO_PORT_27017_TCP_PORT=27017
         - MONGO_INSTANCE_NAME=chat
