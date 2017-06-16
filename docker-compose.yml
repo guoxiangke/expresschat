@@ -5,20 +5,16 @@ web:
     volumes:
         - /usr/src/app/public/files
     links:
-        - "mongodb"
-    depends_on:
-        - mongodb
+        - "db"
     ports:
         - "3000:3000"
 #################
-mongodb:
+db:
     image: mongo:latest
     hostname: dbhost
     restart: always
     volumes_from:
-        - storage-mongo  
-    ports:
-        - "27017:27017"
+        - storage-mongo
     environment:
         - MONGO_USERNAME=chat
         - MONGO_PASSWORD=chat
