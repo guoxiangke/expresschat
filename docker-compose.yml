@@ -8,6 +8,12 @@ web:
         - "db"
     ports:
         - "3000:3000"
+    environment:
+        - MONGO_USERNAME=chat
+        - MONGO_PASSWORD=chat
+        - MONGO_PORT_27017_TCP_ADDR=dbhost
+        - MONGO_PORT_27017_TCP_PORT=27017
+        - MONGO_INSTANCE_NAME=chat
 #################
 db:
     image: mongo:latest
