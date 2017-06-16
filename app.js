@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var rooms = require('./routes/rooms');
+var liverooms = require('./routes/liverooms');
 // var chatrooms = require('./routes/chatrooms');
 var intercom = require('./routes/intercom');
 
@@ -34,8 +35,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/room', rooms);
-// app.use('/chatrooms', chatrooms);//某公司的livechat.com/room/companyId/roomId
+app.use('/room', rooms);//visited by room/roomId: http://localhost:3000/room/2017001
+app.use('/live', liverooms);//visited by room/roomId: http://localhost:3000/live/2017001
+// app.use('/chatrooms', chatrooms);//某公司的 http://localhost:3000/a/namespace/rooid
 app.use('/a', intercom);//某公司的livechat.com/room/companyId/roomId
 
 app.use(express.static('public'))
