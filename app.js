@@ -10,7 +10,7 @@ var users = require('./routes/users');
 var rooms = require('./routes/rooms');
 var liverooms = require('./routes/liverooms');
 // var chatrooms = require('./routes/chatrooms');
-var intercom = require('./routes/intercom');
+// var intercom = require('./routes/intercom');
 
 var app = express();
 var server = require('http').Server(app);
@@ -38,7 +38,7 @@ app.use('/users', users);
 app.use('/room', rooms);//visited by room/roomId: http://localhost:3000/room/2017001
 app.use('/live', liverooms);//visited by room/roomId: http://localhost:3000/live/2017001
 // app.use('/chatrooms', chatrooms);//某公司的 http://localhost:3000/a/namespace/rooid
-app.use('/a', intercom);//某公司的livechat.com/room/companyId/roomId
+// app.use('/a', intercom);//某公司的livechat.com/room/companyId/roomId
 
 app.use(express.static('public'))
 

@@ -3,7 +3,9 @@ var router = express.Router();
 var path = require('path');
 var roomID = 'default';
 var debug = require('debug')('liveroom');
+var express = require('express');
 
+var db = require('../databases/database');
 /* GET users listing. */
 // 1. https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4
 // 2. https://segmentfault.com/a/1190000000438604 分组数据传输
@@ -25,12 +27,12 @@ var connections = [];//all connections in all rooms
 router.get('/:id', function(req, res, next) {
   // res.send('respond with a rooms');
   //http://stackoverflow.com/questions/25463423/res-sendfile-absolute-path
-  res.sendFile('chatroom.html', { root: path.join(__dirname, '../public') });
+  res.sendFile('liveroom.html', { root: path.join(__dirname, '../public') });
 
   //https://github.com/onedesign/express-socketio-tutorial
   var io = res.io;
   var roomID = req.params.id;
-  var namespace = '/livechat';
+  var namespace = '/liveroom';
 
   // Chatroom
   io.of(namespace).once('connection', function(socket){
@@ -48,28 +50,23 @@ router.get('/:id', function(req, res, next) {
       updateUsernames();
     })
 
-    //http://stackoverflow.com/questions/33373176/typeerror-io-sockets-clients-is-not-a-function
-    // var usersInRoom = io.of(namespace).in(roomID).clients;
-    // debug('usersInRoom');
-    // debug(usersInRoom);
-    // debug('clientsList');
-    // var clientsList = io.sockets.adapter.rooms;
-    // // var numClients = clientsList.length;
-    // debug(clientsList);
-    // debug('rooms');
-    // debug(io.of(namespace).adapter.rooms);
+    // var user = new db.User({show_name : 'dale'});
+    // user.save(function (err, user) {
+    //   if (err) return console.error(err);
+    //   console.log('meow');//user.speak();
+    // });
 
     // socket.emit('rooms', io.of('/').adapter.rooms);
 
     // 一个socket是否可以同时存在于几个分组，等效于一个用户会同时在几个聊天室活跃，答案是”可以“，socket.join()添加进去就可以了。官方提供了订阅模式的示例：
     socket.on('subscribe', function(data) {
         socket.join(data.room);
-        debug('subscribe Joined room: %s', data.room);
+        debug('访客进入聊天室: %s', data.room);
     })
 
     socket.on('unsubscribe', function(data) {
         socket.leave(data.room);
-        debug('unsubscribe Left room: %s', data.room);
+        debug('访客离开聊天室: %s', data.room);
      })
 
     // when the client emits 'new message', this listens and executes
@@ -80,6 +77,8 @@ router.get('/:id', function(req, res, next) {
         username: socket.username,
         message: data
       });
+      //DB
+
     });
 
     socket.on('user join', function (data,callback) {
@@ -96,6 +95,11 @@ router.get('/:id', function(req, res, next) {
       socket.roomuser = roomuser;
       debug('new user join room:'+socket.room,roomuser);
       updateUsernames(roomuser);
+      //DB
+      db.User.find(function (err, users) {
+      if (err) return console.error(err);
+        console.log(users);
+      })
     });
 
     function updateUsernames(roomuser){
