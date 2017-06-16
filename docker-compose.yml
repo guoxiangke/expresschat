@@ -1,13 +1,13 @@
 web:
-    image: ./
+    image: ./docker/app
     hostname: webhost
     restart: always
     volumes:
-        - /var/www/html/profiles
+        - /usr/src/app/public/files
     links:
         - "db"
-    ports:
-        - "80:80"
+    # ports:
+    #     - "80:80"
 #################
 db:
     image: mongo:latest
