@@ -8,7 +8,7 @@ var messageSchema = new Schema({
   room_id: Schema.Types.ObjectId,
   user_id: Schema.Types.ObjectId,
   is_admin: { type: Boolean, default: false }, //是否是管理员发送的消息？
-  content: String,
+  content: { type: String, default: '' },//login 进入房间 logout 离开房间 正常消息 message @消息 at
   created_at:  { type: Date, default: Date.now }
   //see_by NOt seen yet?!
 });

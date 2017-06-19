@@ -50,11 +50,7 @@ router.get('/:id', function(req, res, next) {
       updateUsernames();
     })
 
-    // var user = new db.User({show_name : 'dale'});
-    // user.save(function (err, user) {
-    //   if (err) return console.error(err);
-    //   console.log('meow');//user.speak();
-    // });
+
 
     // socket.emit('rooms', io.of('/').adapter.rooms);
 
@@ -96,10 +92,17 @@ router.get('/:id', function(req, res, next) {
       debug('new user join room:'+socket.room,roomuser);
       updateUsernames(roomuser);
       //DB
-      db.User.find(function (err, users) {
-      if (err) return console.error(err);
-        console.log(users);
-      })
+      var user = new db.User({
+        show_name : socket.username,
+      });
+      user.save(function (err, user) {
+        if (err) return console.error(err);
+        debug('saved one user!');//user.speak();
+        db.User.find(function (err, users) {
+        if (err) return console.error(err);
+          console.log(users);
+        })
+      });
     });
 
     function updateUsernames(roomuser){
